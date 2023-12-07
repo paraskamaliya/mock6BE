@@ -6,7 +6,9 @@ const blogSchema = mongoose.Schema({
     category: String,
     date: String,
     likes: Number,
-    comments: Array
+    comments: Array,
+    username: String,
+    userId: String
 }, {
     versionKey: false
 })

@@ -88,7 +88,7 @@ userRouter.post("/blogs", auth, async (req, res) => {
     const { title, content, category, date, likes } = req.body;
     try {
         const blog = new BlogModel({
-            title, content, category, date, likes, comments: []
+            title, content, category, date, likes, comments: [], username: req.body.username, userId: req.body.userId
         })
         await blog.save();
         res.status(200).send({ "message": "Blog posted", "blog": blog });
