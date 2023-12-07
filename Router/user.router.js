@@ -67,11 +67,11 @@ userRouter.get("/blogs", auth, async (req, res) => {
         }
         else if (sort && ord) {
             if (ord == "asc") {
-                const blogs = await BlogModel.aggregate([{ $sort: { sort: 1 } }])
+                const blogs = await BlogModel.aggregate([{ $sort: { date: 1 } }])
                 res.status(200).send(blogs);
             }
             else if (ord == "desc") {
-                const blogs = await BlogModel.aggregate([{ $sort: { sort: -1 } }])
+                const blogs = await BlogModel.aggregate([{ $sort: { date: -1 } }])
                 res.status(200).send(blogs);
             }
         }
