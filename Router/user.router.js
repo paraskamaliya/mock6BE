@@ -133,7 +133,7 @@ userRouter.patch("/blogs/:id/like", auth, async (req, res) => {
     const { id } = req.params;
     try {
         const blog = await BlogModel.findOne({ _id: id });
-        blog.likes = blog.likes++;
+        blog.likes++;
         await BlogModel.findByIdAndUpdate({ _id: id }, blog)
         res.status(200).send({ "message": "Like added" })
     } catch (error) {
@@ -147,7 +147,7 @@ userRouter.patch("/blogs/:id/comment", auth, async (req, res) => {
         const blog = await BlogModel.findOne({ _id: id });
         blog.comments.push(req.body);
         await BlogModel.findByIdAndUpdate({ _id: id }, blog)
-        res.status(200).send({ "message": "Like added" })
+        res.status(200).send({ "message": "comment added" })
     } catch (error) {
         res.status(400).send({ "message": "Something went wrong", "err": error })
     }
