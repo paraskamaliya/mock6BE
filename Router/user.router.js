@@ -58,25 +58,25 @@ userRouter.get("/blogs", auth, async (req, res) => {
     const { title, category, sort, ord } = req.query;
     try {
         if (title) {
-            const blogs = await BlogModel.find({ username: req.body.username, title })
+            const blogs = await BlogModel.find({ title })
             res.status(200).send(blogs);
         }
         else if (category) {
-            const blogs = await BlogModel.find({ username: req.body.username, category })
+            const blogs = await BlogModel.find({ category })
             res.status(200).send(blogs);
         }
         else if (sort && ord) {
             if (ord == "asc") {
-                const blogs = await BlogModel.aggregate([{ username: req.body.username }, { $sort: { sort: 1 } }])
+                const blogs = await BlogModel.aggregate([{ $sort: { sort: 1 } }])
                 res.status(200).send(blogs);
             }
             else if (ord == "desc") {
-                const blogs = await BlogModel.aggregate([{ username: req.body.username }, { $sort: { sort: -1 } }])
+                const blogs = await BlogModel.aggregate([{ $sort: { sort: -1 } }])
                 res.status(200).send(blogs);
             }
         }
         else {
-            const blogs = await BlogModel.find({ username: req.body.username })
+            const blogs = await BlogModel.find()
             res.status(200).send(blogs);
         }
     } catch (error) {
